@@ -55,7 +55,11 @@ const panelMotion = {
 
 /* ------------------------------------------------------------------ */
 
-export function Showcase() {
+interface ShowcaseProps {
+  onStartMock?: (testIndex?: number) => void;
+}
+
+export function Showcase({ onStartMock }: ShowcaseProps = {}) {
   const [tab, setTab] = useState<TabId>("full");
 
   return (
@@ -184,13 +188,21 @@ export function Showcase() {
                               />
                             </div>
                             {m.state === "Attempt" ? (
-                              <button className="inline-flex items-center gap-1.5 rounded-full bg-ink-950 px-4 py-2 text-xs font-bold text-white transition-transform duration-300 hover:scale-105">
+                              <button
+                                type="button"
+                                onClick={() => onStartMock?.(0)}
+                                className="inline-flex items-center gap-1.5 rounded-full bg-ink-950 px-4 py-2 text-xs font-bold text-white transition-transform duration-300 hover:scale-105"
+                              >
                                 <Play className="size-3" /> Attempt
                               </button>
                             ) : (
-                              <span className="whitespace-nowrap rounded-full bg-emerald-500/10 px-3 py-2 text-[11px] font-bold text-emerald-600">
-                                {m.state}
-                              </span>
+                              <button
+                                type="button"
+                                onClick={() => onStartMock?.(0)}
+                                className="whitespace-nowrap rounded-full bg-emerald-500/10 px-3 py-2 text-[11px] font-bold text-emerald-600 hover:bg-emerald-500/20 transition-colors"
+                              >
+                                {m.state} · Retake
+                              </button>
                             )}
                           </div>
                         </motion.div>
@@ -245,7 +257,11 @@ export function Showcase() {
                               <p className="text-[11px] font-semibold text-ink-400">
                                 <span className="text-ink-800">{c.pct}%</span> mastery
                               </p>
-                              <button className="rounded-full border border-ink-950/10 px-3.5 py-1.5 text-[11px] font-bold text-ink-700 transition-all duration-300 group-hover:border-ink-950 group-hover:bg-ink-950 group-hover:text-white">
+                              <button
+                                type="button"
+                                onClick={() => onStartMock?.(1)}
+                                className="rounded-full border border-ink-950/10 px-3.5 py-1.5 text-[11px] font-bold text-ink-700 transition-all duration-300 group-hover:border-ink-950 group-hover:bg-ink-950 group-hover:text-white"
+                              >
                                 Drill now →
                               </button>
                             </div>
@@ -294,7 +310,11 @@ export function Showcase() {
                             <p className="mt-2 text-[11px] font-semibold text-ink-400">
                               community avg. accuracy
                             </p>
-                            <button className="mt-4 w-full rounded-full bg-ink-950 py-2.5 text-xs font-bold text-white transition-all duration-300 hover:bg-brand-700">
+                            <button
+                              type="button"
+                              onClick={() => onStartMock?.(2)}
+                              className="mt-4 w-full rounded-full bg-ink-950 py-2.5 text-xs font-bold text-white transition-all duration-300 hover:bg-brand-700"
+                            >
                               Take a 25-min subject test
                             </button>
                           </div>

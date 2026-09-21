@@ -2,7 +2,11 @@ import { motion } from "framer-motion";
 import { ArrowRight, BadgeCheck, Languages, Wallet } from "lucide-react";
 import { Reveal } from "./ui/Reveal";
 
-export function Cta() {
+interface CtaProps {
+  onStartMock?: () => void;
+}
+
+export function Cta({ onStartMock }: CtaProps = {}) {
   return (
     <section className="relative overflow-hidden bg-ink-950 py-28 sm:py-36">
       {/* ambient */}
@@ -45,8 +49,9 @@ export function Cta() {
         </Reveal>
         <Reveal delay={0.26}>
           <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
-            <motion.a
-              href="#pricing"
+            <motion.button
+              type="button"
+              onClick={onStartMock}
               whileHover={{ scale: 1.04, y: -2 }}
               whileTap={{ scale: 0.97 }}
               transition={{ type: "spring", stiffness: 400, damping: 20 }}
@@ -56,7 +61,7 @@ export function Cta() {
               <span className="grid size-6 place-items-center rounded-full bg-ink-950 text-white transition-transform duration-300 group-hover:translate-x-1">
                 <ArrowRight className="size-3.5" />
               </span>
-            </motion.a>
+            </motion.button>
           </div>
         </Reveal>
         <Reveal delay={0.34}>

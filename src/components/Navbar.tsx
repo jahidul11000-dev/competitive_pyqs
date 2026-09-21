@@ -12,7 +12,11 @@ const links = [
   { label: "FAQ", href: "#faq" },
 ];
 
-export function Navbar() {
+interface NavbarProps {
+  onStartMock?: () => void;
+}
+
+export function Navbar({ onStartMock }: NavbarProps = {}) {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -84,13 +88,14 @@ export function Navbar() {
           >
             Sign in
           </a>
-          <a
-            href="#pricing"
+          <button
+            type="button"
+            onClick={onStartMock}
             className="btn-shine group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-brand-600 to-violet-600 px-5 py-2.5 text-sm font-semibold text-white shadow-[0_10px_30px_-8px_rgba(91,65,221,0.6)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_16px_40px_-8px_rgba(91,65,221,0.7)]"
           >
             Start free mock
             <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-0.5" />
-          </a>
+          </button>
         </div>
 
         {/* Mobile toggle */}
@@ -136,14 +141,17 @@ export function Navbar() {
                 </motion.li>
               ))}
               <li className="pt-3">
-                <a
-                  href="#pricing"
-                  onClick={() => setOpen(false)}
-                  className="btn-shine flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-brand-600 to-violet-600 px-5 py-3.5 font-display text-base font-semibold text-white"
+                <button
+                  type="button"
+                  onClick={() => {
+                    setOpen(false);
+                    onStartMock?.();
+                  }}
+                  className="btn-shine w-full flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-brand-600 to-violet-600 px-5 py-3.5 font-display text-base font-semibold text-white"
                 >
                   Start free mock
                   <ArrowRight className="size-4" />
-                </a>
+                </button>
               </li>
             </ul>
           </motion.div>

@@ -22,7 +22,11 @@ const championFeatures = [
   "2026 shifts added within 72 hours",
 ];
 
-export function Pricing() {
+interface PricingProps {
+  onStartMock?: () => void;
+}
+
+export function Pricing({ onStartMock }: PricingProps = {}) {
   const [yearly, setYearly] = useState(true);
 
   return (
@@ -105,12 +109,13 @@ export function Pricing() {
                   </li>
                 ))}
               </ul>
-              <a
-                href="#top"
-                className="mt-8 block rounded-full border-[1.5px] border-ink-950 py-3.5 text-center font-display text-sm font-bold text-ink-950 transition-all duration-300 hover:bg-ink-950 hover:text-white"
+              <button
+                type="button"
+                onClick={onStartMock}
+                className="mt-8 block w-full rounded-full border-[1.5px] border-ink-950 py-3.5 text-center font-display text-sm font-bold text-ink-950 transition-all duration-300 hover:bg-ink-950 hover:text-white"
               >
                 Start for free
-              </a>
+              </button>
             </article>
           </Reveal>
 
@@ -168,12 +173,13 @@ export function Pricing() {
                   ))}
                 </ul>
 
-                <a
-                  href="#top"
-                  className="btn-shine group relative mt-9 flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-brand-500 via-violet-600 to-fuchsia-600 py-4 font-display text-sm font-bold text-white shadow-[0_20px_50px_-12px_rgba(109,93,246,0.7)] transition-all duration-300 hover:shadow-[0_26px_60px_-12px_rgba(109,93,246,0.9)]"
+                <button
+                  type="button"
+                  onClick={onStartMock}
+                  className="btn-shine group relative mt-9 flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-brand-500 via-violet-600 to-fuchsia-600 py-4 font-display text-sm font-bold text-white shadow-[0_20px_50px_-12px_rgba(109,93,246,0.7)] transition-all duration-300 hover:shadow-[0_26px_60px_-12px_rgba(109,93,246,0.9)]"
                 >
                   Become a Champion
-                </a>
+                </button>
                 <p className="relative mt-4 text-center text-xs text-white/35">
                   7-day no-questions refund · GST invoice for reimbursement
                 </p>

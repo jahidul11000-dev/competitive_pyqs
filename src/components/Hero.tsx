@@ -32,7 +32,7 @@ const questionHI =
 const options = ["6.5 days", "7.2 days", "8 days", "9 days"];
 const optionLabels = ["A", "B", "C", "D"];
 
-function ExamWindow() {
+function ExamWindow({ onStartMock }: { onStartMock?: () => void } = {}) {
   const [current, setCurrent] = useState(8); // 0-indexed → Q.09
   const [answers, setAnswers] = useState<Record<number, number>>({
     0: 2,
@@ -95,6 +95,15 @@ function ExamWindow() {
               </p>
             </div>
             <div className="flex items-center gap-2">
+              {onStartMock && (
+                <button
+                  type="button"
+                  onClick={onStartMock}
+                  className="hidden sm:inline-flex items-center gap-1 rounded-full bg-brand-500/20 px-2.5 py-1 text-[10px] font-bold text-brand-300 hover:bg-brand-500/30 transition-colors"
+                >
+                  Enter Test Engine ↗
+                </button>
+              )}
               <span className="rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-[10px] font-semibold text-white/60">
                 +2.0 / −0.5
               </span>
@@ -330,7 +339,11 @@ const item: Variants = {
   },
 };
 
-export function Hero() {
+interface HeroProps {
+  onStartMock?: () => void;
+}
+
+export function Hero({ onStartMock }: HeroProps = {}) {
   const mx = useMotionValue(-800);
   const my = useMotionValue(-800);
   const sx = useSpring(mx, { stiffness: 60, damping: 18 });
@@ -401,13 +414,14 @@ export function Hero() {
             </motion.p>
 
             <motion.div variants={item} className="mt-9 flex flex-wrap items-center gap-4">
-              <a
-                href="#pricing"
+              <button
+                type="button"
+                onClick={onStartMock}
                 className="btn-shine group inline-flex items-center gap-2.5 rounded-full bg-gradient-to-r from-brand-500 via-violet-600 to-fuchsia-600 px-7 py-4 font-display text-sm font-bold text-white shadow-[0_20px_50px_-12px_rgba(109,93,246,0.65)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_28px_60px_-12px_rgba(109,93,246,0.8)]"
               >
                 Attempt a free mock
                 <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-1" />
-              </a>
+              </button>
               <a
                 href="#showcase"
                 className="group inline-flex items-center gap-2 rounded-full border border-white/15 px-6 py-4 text-sm font-semibold text-white/80 transition-all duration-300 hover:border-white/35 hover:bg-white/5 hover:text-white"
@@ -459,7 +473,7 @@ export function Hero() {
             transition={{ duration: 1.1, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
             className="relative"
           >
-            <ExamWindow />
+            <ExamWindow onStartMock={onStartMock} />
           </motion.div>
         </div>
       </div>
